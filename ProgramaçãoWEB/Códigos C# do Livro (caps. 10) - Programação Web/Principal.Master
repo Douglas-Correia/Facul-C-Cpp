@@ -1,0 +1,57 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Principal.master.cs" Inherits="LojaDepartamentos.Principal" %>
+<!DOCTYPE html>
+<html>
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+<%
+    if (Application["SqlConnectionString"] == null)
+        Application["SqlConnectionString"] = 
+            @"Data Source=(localdb)\MSSQLLocalDB;
+            Initial Catalog=LojaDepartamentos;Integrated Security=True;
+            Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;
+            ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+%>
+    <form id="form1" runat="server">
+    <div class="cabecalho">
+        <table>
+            <tr><td><img src="logo_loja.jpg"></td></tr>
+        </table>
+    </div>
+    <div class="navbar">
+        <table class="menudepartamentos"><tr>
+        <%
+            string SqlSelectCommand = "SELECT IdDepartamento, Nome ";
+            SqlSelectCommand += "FROM Departamento ";
+            SqlSelectCommand += "ORDER BY Nome";
+            SqlDataSource ds = new SqlDataSource((string)Application["SqlConnectionString"], SqlSelectCommand);
+            GridView gd = new GridView();
+            gd.DataSource = ds;
+            gd.DataBind();
+            string tmp_iddepartamento, tmp_nome;
+            for (int i = 0; i < gd.Rows.Count; i++)
+            {
+                tmp_iddepartamento = gd.Rows[i].Cells[0].Text;
+                tmp_nome = gd.Rows[i].Cells[1].Text;
+                Response.Write(@"<td><a runat=""server"" href=""Categoria.aspx?iddepartamento=");
+                Response.Write(tmp_iddepartamento + @""">" + tmp_nome + "</a></td>");
+            }
+        %>
+        </tr></table>
+    </div>
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    <div class="rodape">
+        <table>
+            <tr><td>2017 - Todos os direitos reservados</td></tr>
+        </table>
+    </div>
+    </form>
+</body>
+</html>
