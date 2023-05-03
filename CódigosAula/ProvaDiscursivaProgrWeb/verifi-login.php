@@ -43,7 +43,7 @@
 
                 }
                  else {
-                    echo "Falha ao logar! E-mail ou Senha incorretos <p><a href=\"index.html\">Voltar</a></p>";
+                    echo "Falha ao logar! E-mail ou Senha incorretos <p><a href=\"login.php\">Voltar</a></p>";
                 }
             }
         }
