@@ -18,9 +18,12 @@
                 <h3>Entre para acessar o painel</h3>
                 <label for="usuario" class="form-control">Usuário:</label>
                 <input type="text" name="usuario" required placeholder="ex: usuario123" class="form-control">
+                <label class="verifi-usuario"></label>
+
                 <label for="senha" class="form-control">Senha:</label>
                 <input type="password" name="senha" required placeholder="ex: senha123" class="form-control">
-
+                <label class="verifi-senha"></label>
+                
                 <button type="submit" class="btn btn-info" name="entrar">Entrar</button>
             </form>
         </div>
